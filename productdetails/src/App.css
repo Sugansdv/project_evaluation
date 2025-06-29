@@ -1,0 +1,16 @@
+.custom-nav {
+  color: black !important;
+  transition: color 0.3s ease;
+  
+  font-size: 1.2em !important;
+}
+
+.custom-nav:hover {
+  color: rgb(5, 119, 160) !important; 
+  text-decoration: underline;
+}
+
+.active-link {
+  color: rgb(5, 119, 160)  !important;
+  font-weight: bolder;
+}

@@ -1,0 +1,62 @@
+/* Fade & Shake Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+.animate-form {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.animate-modal {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Custom Modal Styling */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.custom-modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+}
+/* Toggle eye icon positioning */
+.toggle-eye {
+  position: absolute;
+  right: 15px;
+  top: 38px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+/* Add on hover */
+.toggle-eye:hover {
+  color: #000;
+}
+
