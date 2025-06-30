@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
-import { FaCheck, FaTrash, FaEye, FaPlus, FaEdit, FaSave } from "react-icons/fa";
+import {
+  FaCheck,
+  FaTrash,
+  FaEye,
+  FaPlus,
+  FaEdit,
+  FaSave,
+} from "react-icons/fa";
 import { Modal } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./TodoApp.css";
 
 const LOCAL_KEY = "my_tasks";
@@ -43,10 +49,13 @@ const TodoApp = () => {
   };
 
   const markDone = (id) =>
-    setTasks(tasks.map((task) => (task.id === id ? { ...task, completed: true } : task)));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: true } : task
+      )
+    );
 
-  const deleteTask = (id) =>
-    setTasks(tasks.filter((task) => task.id !== id));
+  const deleteTask = (id) => setTasks(tasks.filter((task) => task.id !== id));
 
   const clearAll = () => {
     if (window.confirm("Clear all tasks?")) {
@@ -60,7 +69,11 @@ const TodoApp = () => {
   };
 
   const saveEdit = (id) => {
-    setTasks(tasks.map((task) => (task.id === id ? { ...task, title: editText.trim() } : task)));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, title: editText.trim() } : task
+      )
+    );
     setEditId(null);
     setEditText("");
   };
@@ -87,14 +100,37 @@ const TodoApp = () => {
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
-        <Button label="Add" variant="primary" icon={<FaPlus />} onClick={handleAdd} />
+        <Button
+          label="Add"
+          variant="primary"
+          icon={<FaPlus />}
+          onClick={handleAdd}
+        />
       </div>
 
       <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
-        <Button label="All" variant={filter === "all" ? "primary" : "outline"} onClick={() => setFilter("all")} />
-        <Button label="Active" variant={filter === "active" ? "primary" : "outline"} onClick={() => setFilter("active")} />
-        <Button label="Completed" variant={filter === "completed" ? "primary" : "outline"} onClick={() => setFilter("completed")} />
-        <Button label="Clear All" variant="danger" icon={<FaTrash />} onClick={clearAll} />
+        <Button
+          label="All"
+          variant={filter === "all" ? "primary" : "outline"}
+          onClick={() => setFilter("all")}
+        />
+        <Button
+          label="Active"
+          variant={filter === "active" ? "primary" : "outline"}
+          onClick={() => setFilter("active")}
+        />
+        <Button
+          label="Completed"
+          variant={filter === "completed" ? "secondary" : "outline"}
+          onClick={() => setFilter("completed")}
+        />
+
+        <Button
+          label="Clear All"
+          variant="danger"
+          icon={<FaTrash />}
+          onClick={clearAll}
+        />
       </div>
 
       {filteredTasks.length === 0 ? (
@@ -103,25 +139,64 @@ const TodoApp = () => {
         filteredTasks.map((task) => (
           <div
             key={task.id}
-            className={`d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center border p-3 mb-3 shadow-sm rounded ${task.completed ? "bg-light" : ""}`}
+            className={`d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center border p-3 mb-3 shadow-sm rounded ${
+              task.completed ? "bg-light" : ""
+            }`}
           >
             {editId === task.id ? (
-              <input className="form-control me-2 mb-2 mb-md-0" value={editText} onChange={(e) => setEditText(e.target.value)} />
+              <input
+                className="form-control me-2 mb-2 mb-md-0"
+                value={editText}
+                onChange={(e) => setEditText(e.target.value)}
+              />
             ) : (
-              <span className="mb-2 mb-md-0" style={{ textDecoration: task.completed ? "line-through" : "none", fontWeight: 500 }}>
+              <span
+                className="mb-2 mb-md-0"
+                style={{
+                  textDecoration: task.completed ? "line-through" : "none",
+                  fontWeight: 500,
+                }}
+              >
                 {task.title}
               </span>
             )}
 
             <div className="d-flex flex-wrap gap-2">
-              <Button label="View" variant="outline" icon={<FaEye />} onClick={() => viewTask(task)} />
-              {!task.completed && <Button label="Done" variant="success" icon={<FaCheck />} onClick={() => markDone(task.id)} />}
-              {editId === task.id ? (
-                <Button label="Save" variant="primary" icon={<FaSave />} onClick={() => saveEdit(task.id)} />
-              ) : (
-                <Button label="Edit" variant="secondary" icon={<FaEdit />} onClick={() => startEdit(task.id, task.title)} />
+              <Button
+                label="View"
+                variant="outline"
+                icon={<FaEye />}
+                onClick={() => viewTask(task)}
+              />
+              {!task.completed && (
+                <Button
+                  label="Done"
+                  variant="success"
+                  icon={<FaCheck />}
+                  onClick={() => markDone(task.id)}
+                />
               )}
-              <Button label="Delete" variant="danger" icon={<FaTrash />} onClick={() => deleteTask(task.id)} />
+              {editId === task.id ? (
+                <Button
+                  label="Save"
+                  variant="primary"
+                  icon={<FaSave />}
+                  onClick={() => saveEdit(task.id)}
+                />
+              ) : (
+                <Button
+                  label="Edit"
+                  variant="secondary"
+                  icon={<FaEdit />}
+                  onClick={() => startEdit(task.id, task.title)}
+                />
+              )}
+              <Button
+                label="Delete"
+                variant="danger"
+                icon={<FaTrash />}
+                onClick={() => deleteTask(task.id)}
+              />
             </div>
           </div>
         ))
